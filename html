@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Bounty Hunting</title>
+<style>
+body {
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  margin: 0;
+}
+
+header {
+  background: #1e293b;
+  padding: 15px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.container {
+  padding: 20px;
+}
+
+form {
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+input, textarea {
+  width: 100%;
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+}
+
+button {
+  background: #22c55e;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+  border-radius: 5px;
+}
+
+.post {
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.bounty {
+  color: gold;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>🎯 Bounty Hunting Board</header>
+
+<div class="container">
+
+<form id="bountyForm">
+  <input type="text" id="title" placeholder="Tên nhiệm vụ" required>
+  <textarea id="desc" placeholder="Mô tả nhiệm vụ"></textarea>
+  <input type="number" id="reward" placeholder="Bounty (điểm)">
+  <input type="text" id="user" placeholder="Tên của bạn">
+  <button type="submit">Đăng Bounty</button>
+</form>
+
+<div id="posts"></div>
+
+</div>
+
+<script>
+const form = document.getElementById("bountyForm");
+const postsDiv = document.getElementById("posts");
+
+let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+function renderPosts() {
+  postsDiv.innerHTML = "";
+  posts.forEach((p, index) => {
+    postsDiv.innerHTML += `
+      <div class="post">
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        <p class="bounty">💰 ${p.reward} bounty</p>
+        <small>By: ${p.user}</small>
+      </div>
+    `;
+  });
+}
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const newPost = {
+    title: title.value,
+    desc: desc.value,
+    reward: reward.value,
+    user: user.value || "Ẩn danh"
+  };
+
+  posts.unshift(newPost);
+  localStorage.setItem("posts", JSON.stringify(posts));
+
+  form.reset();
+  renderPosts();
+});
+
+renderPosts();
+</script>
+
+</body>
+</html>
+<button onclick="likePost(${index})">👍</button>
+<p>Rank: ${getRank(userPoints)}</p>
