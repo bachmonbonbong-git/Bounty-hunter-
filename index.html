@@ -113,7 +113,11 @@ form.addEventListener("submit", function(e) {
 
   form.reset();
   renderPosts();
-});
+});<select id="difficulty">
+  <option value="Easy">🟢 Easy</option>
+  <option value="Medium">🟡 Medium</option>
+  <option value="Hard">🔴 Hard</option>
+</select>
 
 renderPosts();
 </script>
@@ -122,3 +126,12 @@ renderPosts();
 </html>
 <button onclick="likePost(${index})">👍</button>
 <p>Rank: ${getRank(userPoints)}</p>
+<input id="username" placeholder="Tên">
+<button onclick="login()">Login</button>
+<h2>🛒 Shop</h2>
+<button onclick="buy(100)">VIP Tag (100)</button>
+<button onclick="buy(500)">Pro Hunter (500)</button>
+<button onclick="acceptTask(${index})">Nhận</button>
+<div style="background:#333; width:200px;">
+  <div id="xpbar" style="background:lime; height:10px;"></div>
+</div>
